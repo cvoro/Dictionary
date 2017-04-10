@@ -5,44 +5,36 @@
 
         <!-- Header -->
         <header class="w3-container w3-xlarge w3-padding-24">
-            <div class="w3-container">
-                <div id="id01" class="w3-modal">
-                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-                        <div class="w3-center"><br>
-                            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                            <img src="/assets/translation-flags.jpg" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
-                        </div>
-
-                        <form class="w3-container" action="/action_page.php">
-                            <div class="w3-section">
-                                <label><b>Username</b></label>
-                                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
-                                <label><b>Password</b></label>
-                                <input class="w3-input w3-border" type="text" placeholder="Enter Password" name="psw" required>
-                                <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-                                <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
-                            </div>
-                        </form>
-                        <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                            <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-                            <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
+            <login></login>
             <a href="#" onclick="document.getElementById('id01').style.display='block'" class="w3-left w3-button w3-white">Login</a>
-            <a href="#contact" class="w3-right w3-button w3-white">Contact</a>
+            <a href="#import" class="w3-right w3-button w3-white">Import</a>
         </header>
 
         <!-- Photo Grid -->
         <div class="w3-row">
             <div class="w3-half">
-                <img src="/assets/top.jpg" style="width:100%">
-                <img src="/assets/o-COMPUTER-TRANSLATE-facebook.jpg" style="width:100%">
-                <!--<img src="/assets/22-12-14_Translation.jpg" style="width:100%">-->
+                <form style="margin:auto;width:60%" action="/action_page.php" target="_blank">
+                    <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
+                        condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                    <p class="w3-large w3-text-pink">Do not hesitate to contact me!</p>
+                    <div class="w3-section">
+                        <label><b>Word</b></label>
+                        <input class="w3-input w3-border" type="text" required name="Word">
+                    </div>
+                    <div class="w3-section">
+                        <label><b>Language</b></label>
+                        <select class="w3-select" name="language">
+  <option value="" disabled selected>Choose your option</option>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+  <option value="3">Option 3</option>
+</select>
+                    </div>
+
+                    <button type="submit" class="w3-button w3-block w3-dark-grey">Translate</button>
+                </form>
+                <!--<img src="/assets/top.jpg" style="width:100%">
+                <img src="/assets/o-COMPUTER-TRANSLATE-facebook.jpg" style="width:100%">-->
             </div>
             <div class="w3-half">
                 <img src="/assets/22-12-14_Translation.jpg" style="width:100%">
@@ -55,24 +47,29 @@
 </body>
 
 <!-- Footer / About Section -->
-<footer class="w3-light-grey w3-padding-64 w3-center" id="contact">
-    <h2>Contact</h2>
-    <img src="/assets/download.jpg" class="w3-image w3-padding-32" width="300" height="300">
+<footer class="w3-light-grey w3-padding-64 w3-center" id="import">
+    <h2>Import Word</h2>
+    <!--<img src="/assets/download.jpg" class="w3-image w3-padding-32" width="300" height="300">-->
     <form style="margin:auto;width:60%" action="/action_page.php" target="_blank">
         <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum,
             porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
         <p class="w3-large w3-text-pink">Do not hesitate to contact me!</p>
         <div class="w3-section">
-            <label><b>Name</b></label>
-            <input class="w3-input w3-border" type="text" required name="Name">
+            <label><b>Word</b></label>
+            <input class="w3-input w3-border" type="text" required name="Word">
         </div>
         <div class="w3-section">
-            <label><b>Email</b></label>
-            <input class="w3-input w3-border" type="text" required name="Email">
+            <label><b>Language</b></label>
+            <select class="w3-select" name="language">
+  <option value="" disabled selected>Choose your option</option>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+  <option value="3">Option 3</option>
+</select>
         </div>
         <div class="w3-section">
-            <label><b>Message</b></label>
-            <input class="w3-input w3-border" required name="Message">
+            <label><b>Translation</b></label>
+            <input class="w3-input w3-border" required name="translation">
         </div>
         <button type="submit" class="w3-button w3-block w3-dark-grey">Send</button>
     </form>
