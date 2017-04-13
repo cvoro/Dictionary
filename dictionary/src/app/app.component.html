@@ -18,23 +18,33 @@
                     <p class="w3-large w3-text-pink">Do not hesitate to contact me!</p>
                     <div class="w3-section">
                         <label><b>Word</b></label>
-                        <input class="w3-input w3-border" type="text" required name="Word" [(ngModel)]="data.word">
+                        <input class="w3-input w3-border" type="text" required name="wOrd" id="wOrd" #wOrd="ngModel" [(ngModel)]="data.input">
                     </div>
                     <div class="w3-section">
                         <label><b>Language</b></label>
                         <select class="w3-select" name="language" [(ngModel)]="data.language">
-  <option value="" disabled selected>Choose your option</option>
-  <option value="1">English</option>
-  <option value="2">Italian</option>
-  <option value="3">Greek</option>
-</select>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="{{lang.id}}" selected *ngFor="let lang of languages">{{lang.name}}</option>
+                            </select>
                     </div>
+                    <select class="w3-select" name="languagessss">
+    <option value="" disabled selected >Choose your option</option>
+    <option value="1" selected *ngFor="let lang of languages" >Option 1{{lang.name}}</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </select>
 
-                    <button type="submit" class="w3-button w3-block w3-dark-grey" (click)="translate(data)">Translate</button>
+
+                    <button type="submit" [disabled]="!wOrd.valid" class="w3-button w3-block w3-dark-grey" (click)="translate(data)">Translate</button>
+                    <p class="w3-large w3-text-pink" *ngFor="let exp of explanation">Translation: {{exp.output}}</p>
+                </form>
+                <form>
+
                 </form>
                 <!--<img src="/assets/top.jpg" style="width:100%">
                 <img src="/assets/o-COMPUTER-TRANSLATE-facebook.jpg" style="width:100%">-->
             </div>
+
             <div class="w3-half">
                 <img src="/assets/22-12-14_Translation.jpg" style="width:100%">
                 <img src="/assets/Speech.jpg" style="width:100%">
@@ -55,22 +65,20 @@
         <p class="w3-large w3-text-pink">Do not hesitate to contact me!</p>
         <div class="w3-section">
             <label><b>Word</b></label>
-            <input class="w3-input w3-border" type="text" required name="Word" [(ngModel)]="word.word">
+            <input class="w3-input w3-border" type="text" required name="Word" id="Word" #Word="ngModel" [(ngModel)]="word.input">
         </div>
         <div class="w3-section">
             <label><b>Language</b></label>
             <select class="w3-select" name="language" [(ngModel)]="word.language">
-  <option value="" disabled selected >Choose your option</option>
-  <option value="1">English</option>
-  <option value="2">Italian</option>
-  <option value="3">Greek</option>
+  <option value="" disable selected>Choose your option</option>
+  <option value="{{lang.id}}" *ngFor="let lang of languages">{{lang.name}}</option>
 </select>
         </div>
         <div class="w3-section">
             <label><b>Translation</b></label>
-            <input class="w3-input w3-border" required name="translation" [(ngModel)]="word.translation">
+            <input class="w3-input w3-border" required name="translation" id="translation" #translation="ngModel" [(ngModel)]="word.output">
         </div>
-        <button type="submit" class="w3-button w3-block w3-dark-grey" (click)="import(word)">Send</button>
+        <button type="submit" [disabled]="!Word.valid || !translation.valid" class="w3-button w3-block w3-dark-grey" (click)="import(word)">Send</button>
     </form>
     <br>
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
