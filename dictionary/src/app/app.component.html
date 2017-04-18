@@ -3,10 +3,12 @@
     <!-- !PAGE CONTENT! -->
     <div class="w3-content" style="max-width:1500px">
         <!-- Header -->
-        <header class="w3-container w3-xlarge w3-padding-24">
+        <header class="w3-container w3-xlarge w3-padding-24" id="#top">
             <login></login>
-            <a href="#" onclick="document.getElementById('id01').style.display='block'" class="w3-left w3-button w3-white">Login</a>
-            <a href="#import" class="w3-right w3-button w3-white">Import</a>
+            <a *ngIf="!authenticated()" href="#" onclick="document.getElementById('id01').style.display='block'" class="w3-left w3-button w3-white">Login</a>
+            <a *ngIf="authenticated()" class="w3-left w3-button w3-white" (click)="logout()">Logout</a>
+            <a href="#import" class="w3-right w3-button w3-white">Import word</a>
+            <a href="#import-lang" class="w3-right w3-button w3-white">Import language</a>
         </header>
 
         <!-- Photo Grid -->
@@ -22,24 +24,32 @@
                     </div>
                     <div class="w3-section">
                         <label><b>Language</b></label>
-                        <select class="w3-select" name="language" [(ngModel)]="data.language">
+                        <select class="w3-select" name="language" required [(ngModel)]="data.language">
                                 <option value="" disabled selected>Choose your option</option>
                                 <option value="{{lang.id}}" selected *ngFor="let lang of languages">{{lang.name}}</option>
                             </select>
                     </div>
-                    <select class="w3-select" name="languagessss">
+                    <!--<select id="power" class="form-control" name="power" [(ngModel)]="data.language" required #power="ngModel">
+          <option *ngFor="let p of languages" [value]="p">{{p.name}}</option>
+        </select>-->
+                    <div>
+                        <!--<select class="w3-select" name="languagessss">
     <option value="" disabled selected >Choose your option</option>
     <option value="1" selected *ngFor="let lang of languages" >Option 1{{lang.name}}</option>
     <option value="2">Option 2</option>
     <option value="3">Option 3</option>
-  </select>
+  </select>-->
 
-
+                    </div>
                     <button type="submit" [disabled]="!wOrd.valid" class="w3-button w3-block w3-dark-grey" (click)="translate(data)">Translate</button>
-                    <p class="w3-large w3-text-pink" *ngFor="let exp of explanation">Translation: {{exp.output}}</p>
-                </form>
-                <form>
-
+                    <p class="w3-large w3-text-pink" *ngFor="let exp of explanation; let i = index">
+                        Word:<input class="w3-input w3-border" type="text" name="{{exp.input}}" [(ngModel)]="exp.input">
+                        <!--<input class="w3-input w3-border" type="text" name="{{exp.language}}" [(ngModel)]="exp.language">-->
+                        Translation:<input class="w3-input w3-border" type="text" name="{{exp.output}}" [(ngModel)]="exp.output">
+                        <button type="submit" class="w3-button w3-block w3-dark-grey w3-half" (click)="update(exp)">Update</button>
+                        <button type="submit" class="w3-button w3-block w3-dark-grey w3-half" (click)="delete(exp, i)">Delete</button>
+                    </p>
+                    {{error}}
                 </form>
                 <!--<img src="/assets/top.jpg" style="width:100%">
                 <img src="/assets/o-COMPUTER-TRANSLATE-facebook.jpg" style="width:100%">-->
@@ -54,10 +64,31 @@
         <!-- End Page Content -->
     </div>
 </body>
+<div class="w3-light-grey w3-padding-64 w3-center" id="import-lang">
+    here ll be inport of languages Language:
+    <div style="margin:auto;width:60%">
+        <input class="w3-input w3-border w3-half" type="text" name="langImport" [(ngModel)]="langImport.name">
+        <button type="submit" class="w3-button w3-block w3-dark-grey w3-half" (click)="importLang(langImport)">Import language</button>
+
+        <!--<p *ngFor="let lang of languages">{{lang.name}}</p>-->
+    </div>
+</div>
+<div class="w3-light-grey w3-padding-64">
+    <table class="w3-table w3-bordered" style="margin:auto;width:60%">
+        <tr *ngFor="let lang of languages; let i = index">
+            <td> {{lang.name}}</td>
+            <td> <button type="button" (click)="deleteLang(lang.id, i)" class="w3-red">Delete language</button></td>
+            <!--<td (click)="deleteLang(lang.id, i)" class="glyphicon glyphicon-remove">delete</td>-->
+        </tr>
+    </table>
+</div>
 
 <!-- Footer / About Section -->
 <footer class="w3-light-grey w3-padding-64 w3-center" id="import">
     <h2>Import Word</h2>
+
+    <a href="#top">Back to top</a>
+
     <!--<img src="/assets/download.jpg" class="w3-image w3-padding-32" width="300" height="300">-->
     <form style="margin:auto;width:60%" action="/action_page.php" target="_blank">
         <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum,
@@ -70,7 +101,7 @@
         <div class="w3-section">
             <label><b>Language</b></label>
             <select class="w3-select" name="language" [(ngModel)]="word.language">
-  <option value="" disable selected>Choose your option</option>
+  <option value="" disabled selected>Choose your option</option>
   <option value="{{lang.id}}" *ngFor="let lang of languages">{{lang.name}}</option>
 </select>
         </div>
@@ -81,5 +112,5 @@
         <button type="submit" [disabled]="!Word.valid || !translation.valid" class="w3-button w3-block w3-dark-grey" (click)="import(word)">Send</button>
     </form>
     <br>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    <!--<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>-->
 </footer>

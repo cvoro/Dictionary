@@ -16,7 +16,7 @@ import {AppService} from './app.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

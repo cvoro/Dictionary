@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { Http, Headers, Response} from '@angular/http';
+import { Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -20,9 +20,30 @@ tanslate(data){
 
 }
 import(word){
-    return this.http.post('http://192.168.0.30:8888/entries/', word,  {headers: this.headers})
+    return this.http.post('http://192.168.0.30:8888/entries/', word, this.jwt())
                 .map((response: Response) => response.json());
-
 }
-    
+update(uWord){
+    return this.http.put('http://192.168.0.30:8888/entries/'+uWord.id, uWord,  this.jwt())
+                .map((response: Response) => response.json());
+}
+delete(uWord){
+    return this.http.delete('http://192.168.0.30:8888/entries/'+uWord.id, this.jwt())
+                .map((response: Response) => response.json());
+}
+   importLang(langImport){
+    return this.http.post('http://192.168.0.30:8888/languages/', langImport, this.jwt())
+                .map((response: Response) => response.json());
+}
+   deleteLang(id){
+    return this.http.delete('http://192.168.0.30:8888/languages/'+id, this.jwt())
+                .map((response: Response) => response.json());
+}
+ private jwt(){
+        let access_token = localStorage.getItem('access_token');
+        if(access_token){
+            let headers = new Headers({'Authorization': 'Bearer ' +  access_token});
+            return new RequestOptions({headers: headers});
+        }
+    }   
 }
